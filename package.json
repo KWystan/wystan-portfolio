@@ -1,0 +1,16 @@
+{
+  "name": "wystan-portfolio",
+  "private": true,
+  "description": "Personal portfolio site for Karl Wystan Cabalonga — client + server",
+  "scripts": {
+    "dev": "concurrently -n client,server -c cyan,green \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "lint": "cd client && npm run lint",
+    "preview": "cd client && npm run preview"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

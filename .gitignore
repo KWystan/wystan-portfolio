@@ -1,0 +1,59 @@
+## Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+## Build output
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+
+## Environment & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+## IDE & editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+## OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+## Testing
+coverage/
+.nyc_output/
+
+## Misc
+*.local
+.cache/
+
+## Claude Code local overrides (machine-specific)
+.claude/settings.local.json
+
+## Vercel
+.vercel
+
+## Browser-save artifacts (accidentally dropped into assets)
+**/Facebook_files/
+**/*.js.download
