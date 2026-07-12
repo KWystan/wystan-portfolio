@@ -6,6 +6,7 @@ import Stack from './components/Stack';
 import Education from './components/Education';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
+import Contributions from './components/Contributions';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
@@ -54,6 +55,7 @@ export default function App() {
           <Education />
           <Projects />
           <Certifications />
+          <Contributions />
           <CTA />
         </main>
         <Footer />
