@@ -153,7 +153,7 @@ export const projects = [
     description: 'An AI-powered chat app with real-time streaming responses, image and PDF upload support, and text-to-image generation. Features user accounts, conversation history, and project organization — powered by React and a custom API backend.',
     techs: ['React', 'Tailwind CSS', 'Vite', 'Node.js', 'Express.js', 'Supabase'],
     result: 'full-stack AI chat',
-    link: '#',
+    link: 'https://wystan-ai.vercel.app/chat',
     snippets: [wystanAiSnippet1, wystanAiSnippet2, wystanAiSnippet3],
   },
   {

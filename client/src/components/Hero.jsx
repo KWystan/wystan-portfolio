@@ -78,7 +78,7 @@ export default function Hero() {
           ))}
 
           <a
-            href="/chat"
+            href="https://wystan-ai.vercel.app/chat"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-black/15 text-xs font-medium text-black/65 hover-gate:border-black/35 hover-gate:text-black active:scale-[0.97] transition-all duration-150"
           >
             Chat with AI
