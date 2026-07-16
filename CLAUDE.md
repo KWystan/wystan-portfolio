@@ -42,7 +42,7 @@ The Vite dev server proxies `/api/*` to the Express server, so only `http://loca
 
 - **Routing — no React Router.** `App.jsx` defines a hand-rolled `usePathname()` hook that tracks `window.location.pathname` via `popstate`. `/` renders the landing page; `/chat` renders `pages/ChatPage.jsx`. To navigate, code pushes with `window.history.pushState` (the popstate listener picks it up). Add new top-level routes by extending this switch — do not introduce React Router without checking first.
 
-- **Landing-page composition** (`App.jsx`): a `LoadingScreen` gate runs first (calls `onFinish` to drop `loading` state), then `Navbar` → `main` {`Hero`, `About`, `Stack`, `Education`, `Projects`, `Certifications`, `CTA`} → `Footer` → floating `ChatWidget`. A fixed full-screen `<Noise>` grain overlay (`z-0`, `pointer-events-none`) sits behind the `z-10` content.
+- **Landing-page composition** (`App.jsx`): a `LoadingScreen` gate runs first (calls `onFinish` to drop `loading` state), then `Navbar` → `main` {`Hero`, `About`, `Stack`, `Education`, `Projects`, `Certifications`, `Contributions`, `CTA`} → `Footer` → floating `ChatWidget`. A fixed full-screen `<Noise>` grain overlay (`z-0`, `pointer-events-none`) sits behind the `z-10` content.
 
 - **Single source of content truth: `client/src/data/portfolioData.js`.** All copy — hero, about, stack, projects, certifications, education, nav links — and the image imports that back them live here. Sections consume it via named exports. **Edit content here, not inside the section components.** Project/certificate images live under `client/src/assets/` and are imported (Vite handles them), not referenced by URL.
 
