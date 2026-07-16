@@ -34,7 +34,7 @@ The Vite dev server proxies `/api/*` to the Express server, so only `http://loca
 
 ## Architecture
 
-- **`client/`** — React 19 + Vite 8 (ESM, `"type": "module"`). Styling is Tailwind CSS v4 via `@tailwindcss/vite` (CSS-first config — there is no `tailwind.config.js`; tokens live in `@theme { }` inside `index.css`). Also pulls `styled-components` and `react-icons`. CommonJS third-party deps are fine to `import` here — Vite handles interop.
+- **`client/`** — React 19 + Vite 8 (ESM, `"type": "module"`). Styling is Tailwind CSS v4 via `@tailwindcss/vite` (CSS-first config — there is no `tailwind.config.js`; tokens live in `@theme { }` inside `index.css`). Also pulls `styled-components`, `react-icons`, and `react-github-calendar`. CommonJS third-party deps are fine to `import` here — Vite handles interop.
 
 - **`server/`** — Express.js 4 (CommonJS — `require`/`module.exports`, no `"type": "module"`). Serves API under `/api/*` on port 5000 (configurable via `PORT`). Uses `cors` middleware and `dotenv`. HTTP requests to the two AI providers use the global `fetch` (Node 22) — no HTTP client dependency.
 
