@@ -47,8 +47,8 @@ The Vite dev server proxies `/api/*` to the Express server, so only `http://loca
 - **Single source of content truth: `client/src/data/portfolioData.js`.** All copy — hero, about, stack, projects, certifications, education, nav links — and the image imports that back them live here. Sections consume it via named exports. **Edit content here, not inside the section components.** Project/certificate images live under `client/src/assets/` and are imported (Vite handles them), not referenced by URL.
 
 - **Custom hooks (`client/src/hooks/`):**
-  - `useScrollReveal.js` — `IntersectionObserver` reveal-on-scroll. Returns `[ref, visible]`; unobserves after the first intersection (fire-once). Pair with the `.scroll-reveal` / `.scroll-reveal.revealed` classes in `index.css`.
-  - `useTypewriter.js` — hero typewriter. Ref-driven loop (word/char index in refs), so the only state update is `displayedText` — no re-render storm.
+  - `useScrollReveal.js` — `IntersectionObserver` reveal-on-scroll. Returns `[ref, visible]`; unobserves after the first intersection (fire-once). Accepts optional `{ threshold, rootMargin }` config. Pair with the `.scroll-reveal` / `.scroll-reveal.revealed` classes in `index.css`.
+  - `useTypewriter.js` — hero typewriter. Ref-driven loop (word/char index in refs), so the only state update is `displayedText` — no re-render storm. Configurable `words`, `typingSpeed`, `deletingSpeed`, `pauseAfterType`, `pauseBeforeNext`.
 
 - **Two chat surfaces, two endpoints:**
   - `components/ChatWidget.jsx` — the floating bubble on the landing page. POSTs to `/api/chat` and awaits a full JSON reply (`data.reply`); non-streaming.
