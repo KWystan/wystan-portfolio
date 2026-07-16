@@ -52,7 +52,9 @@ The Vite dev server proxies `/api/*` to the Express server, so only `http://loca
 
 - **Two chat surfaces, two endpoints:**
   - `components/ChatWidget.jsx` — the floating bubble on the landing page. POSTs to `/api/chat` and awaits a full JSON reply (`data.reply`); non-streaming.
-  - `pages/ChatPage.jsx` — the standalone `/chat` page. POSTs to `/api/chat-full` and **streams** the response by reading `res.body.getReader()` + `TextDecoder`, parsing `data:` SSE lines, and appending tokens into the last assistant message. Holds an `AbortController` ref so in-flight requests can be cancelled.
+  - `pages/ChatPage.jsx` — the standalone `/chat` page. POSTs to `/api/chat-full` and **streams** the response by reading `res.body.getReader()` + `TextDecoder`, parsing `data:` SSE lines, and appending tokens into the last assistant message. Holds an `AbortController` ref so in-flight requests can be cancelled. Renders inline code (\`…\`) and code blocks (\`\`\`…) via `renderMessageText()`.
+
+- **GitHub Activity section** (`components/Contributions.jsx`): renders between `Certifications` and `CTA` on the landing page. Uses `react-github-calendar` to display a contribution heatmap for the `KWystan` GitHub account. Grey-on-white monochrome theme matching the paper aesthetic. Includes tooltip showing per-day counts.
 
 ## Backend architecture (`server/index.js`)
 
