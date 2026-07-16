@@ -26,7 +26,7 @@ cd server && npm run dev       # Dev mode with --watch (auto-restart) on :5000
 cd server && npm start         # Production start
 ```
 
-The Vite dev server proxies `/api/*` to the Express server, so only `http://localhost:3000` needs to be open in the browser. The `npm run dev` command at root runs both projects concurrently — output is prefixed with `[client]` / `[server]` tags.
+The Vite dev server proxies `/api/*` to the Express server, so only `http://localhost:3000` needs to be open in the browser. The `npm run dev` command at root runs both projects concurrently via `concurrently -n client,server -c cyan,green` — output is prefixed with `[client]` / `[server]` in color-coded tags.
 
 ## What this is
 
