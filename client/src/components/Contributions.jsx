@@ -1,9 +1,9 @@
 import { GitHubCalendar } from 'react-github-calendar';
 import useScrollReveal from '../hooks/useScrollReveal';
 
-/* ── Grey-on-white theme to match the portfolio's monochrome aesthetic ── */
+/* ── Vibrant green contribution calendar ─────────────────────── */
 const theme = {
-  light: ['#f3f3f3', '#d9d9d9', '#a3a3a3', '#525252', '#171717'],
+  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
 };
 
 const labels = {
@@ -30,7 +30,7 @@ export default function Contributions() {
   return (
     <section className="py-8 md:py-10 border-t border-black/6 border-line-animate">
       <div className="max-w-5xl mx-auto px-6 border-l border-black/7 border-line-animate">
-        <h2 className="font-magazine text-lg font-semibold tracking-tight text-black mb-4">
+        <h2 className="font-display text-lg font-semibold tracking-tight text-black mb-4">
           GitHub Activity
         </h2>
 
@@ -47,7 +47,7 @@ export default function Contributions() {
               tooltips={tooltips}
               fontSize={13}
               blockSize={12}
-              blockMargin={4}
+              blockMargin={5}
               blockRadius={2}
               colorScheme="light"
             />

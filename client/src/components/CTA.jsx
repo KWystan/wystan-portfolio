@@ -7,7 +7,7 @@ export default function CTA() {
   return (
     <section className="py-8 md:py-10 border-t border-black/6 border-line-animate">
       <div className="max-w-5xl mx-auto px-6 text-center border-l border-black/7 border-line-animate">
-        <h2 className="font-magazine text-xl md:text-2xl font-bold tracking-tight text-black mb-2">
+        <h2 className="font-display text-xl md:text-2xl font-bold tracking-tight text-black mb-2">
           {cta.headline}
         </h2>
         <p

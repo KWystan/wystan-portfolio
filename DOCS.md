@@ -24,7 +24,7 @@ This project is a plain two-directory monorepo — no workspace manager, no mono
 ┌─────────────────────────────────────────────────────────────┐
 │  Express.js (server/)                                       │
 │    └─ http://localhost:5000                                 │
-│       ├─ POST /api/chat       → NVIDIA NIM (Llama 4)   ◄── ChatWidget
+│       ├─ POST /api/chat       → NVIDIA NIM (Llama 3.1 8B)   ◄── ChatWidget
 │       ├─ POST /api/chat-full  → OpenCode Zen (MiMo)    ◄── ChatPage
 │       │                        (SSE streaming)
 │       └─ GET  /api/health     → { status: 'OK' }
@@ -79,6 +79,7 @@ Navigation uses `window.history.pushState` (the `popstate` listener picks it up)
    │  ├─ <Education />             ← education cards (university + HS)
    │  ├─ <Projects />              ← grid cards + image-snippet modals
    │  ├─ <Certifications />        ← card list + certificate-image modals
+   │  ├─ <Contributions />         ← GitHub contribution heatmap (react-github-calendar)
    │  └─ <CTA />                   ← email call-to-action
    ├─ <Footer />
    └─ <ChatWidget />               ← floating chat bubble (bottom-right)
@@ -106,7 +107,7 @@ Images are imported from `client/src/assets/` so Vite can hash and bundle them. 
 
 ### Custom Hooks
 
-- **`useScrollReveal.js`** — `IntersectionObserver`-based reveal-on-scroll. Returns `[ref, visible]`. Unobserves after first intersection (fire-once). Use with `.scroll-reveal` / `.scroll-reveal.revealed` CSS classes.
+- **`useScrollReveal.js`** — `IntersectionObserver`-based reveal-on-scroll. Returns `[ref, visible]`. Unobserves after first intersection (fire-once). Accepts optional `{ threshold, rootMargin }` config. Use with `.scroll-reveal` / `.scroll-reveal.revealed` CSS classes.
 
 - **`useTypewriter.js`** — Hero typewriter effect. Ref-driven loop (word/char index stored in refs to avoid re-render storms). Only state update is `displayedText`. Configurable words array, typing/deleting speeds, and pause durations.
 
@@ -120,7 +121,7 @@ Images are imported from `client/src/assets/` so Vite can hash and bundle them. 
 |---------|-----------|----------|
 | Location | Landing page, bottom-right floating bubble | Standalone `/chat` route |
 | Endpoint | `POST /api/chat` | `POST /api/chat-full` |
-| Upstream | NVIDIA NIM (Llama 4 Maverick) | OpenCode Zen (MiMo-V2.5, Nemotron 3 Ultra, North Mini Code) |
+| Upstream | NVIDIA NIM (Llama 3.1 8B) | OpenCode Zen (MiMo-V2.5, Nemotron 3 Ultra, North Mini Code) |
 | Streaming | No — full JSON reply | Yes — SSE streaming |
 | Context | Last 12 messages | Last 20 messages |
 | Input limit | 1000 chars | 4000 chars |
@@ -142,11 +143,17 @@ The upstream response is consumed with `apiRes.body.getReader()` + `TextDecoder`
 
 Full reference: `emil-design-eng-skill.md` (root).
 
+The system uses four fonts, all free and openly licensed:
+- **[Geist](https://vercel.com/font)** — primary sans-serif body font, loaded via `@fontsource-variable/geist`
+- **[Geist Mono](https://vercel.com/font)** — monospace for code blocks and technical text, loaded via `@fontsource-variable/geist-mono`
+- **[Geist Pixel](https://github.com/vercel/geist-pixel-font)** — display/accent font (Square variant), self-hosted woff2 from GitHub
+- **[Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4)** — serif for long-form body paragraphs, loaded from Google Fonts
+
 ### Tailwind v4 CSS-first Config
 
 - `@import "tailwindcss"` then `@theme { … }` in `client/src/index.css`
 - No `tailwind.config.js` — tokens live in the `@theme` block
-- Design tokens defined: easing curves (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), animation shorthands (`--animate-fade-up`, `--animate-scale-in`, `--animate-float`, `--animate-blink`), fonts (`--font-magazine` = Playfair Display, `--font-cursive` = Dancing Script)
+- Design tokens defined: easing curves (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), animation shorthands (`--animate-fade-up`, `--animate-scale-in`, `--animate-float`, `--animate-blink`), fonts (`--font-sans` = Geist, `--font-serif` = Source Serif 4, `--font-mono` = Geist Mono, `--font-display` = Geist Pixel Square)
 
 ### Motion Rules
 
@@ -169,7 +176,8 @@ Defined hover-gate classes:
 - White background (#ffffff), black (#000000) text
 - Two layers of SVG fractal-noise grain on `body::before`/`::after` (`mix-blend-mode: multiply`, differing opacities)
 - `<Noise>` component — Canvas-based grain overlay (animated noise pattern, refresh every 2 frames)
-- Grid-line borders: vertical (`border-l`) and horizontal (`border-t`) with `border-line-animate` / `border-drift` keyframes for subtle opacity oscillation
+- Grid-line borders: vertical (`border-l`) and horizontal (`border-t`) with `border-line-animate` / `border-drift` keyframes for subtle opacity oscillation. Reusable CSS utility: `.grid-line-v` for vertical line + drift animation.
+- Material Symbols — icon set used throughout (ChatPage, ChatWidget, etc.). Font-variation-settings override in `index.css` for thinner weight. No wrapper component — `<span class="material-symbols-outlined">name</span>` inline.
 - `prefers-reduced-motion` collapses all animation/transition durations to ~0ms but keeps opacity/color transitions
 
 ## API Proxy Pattern
@@ -192,7 +200,7 @@ Frontend fetches relative: `fetch('/api/health')` — never hardcode `http://loc
 
 | Endpoint | Method | Upstream | Model | Streaming | Context | Used By |
 |---|---|---|---|---|---|---|
-| `/api/chat` | POST | NVIDIA NIM (hardcoded `https://integrate.api.nvidia.com/v1`) | `meta/llama-4-maverick-17b-128e-instruct` | No (`max_tokens: 512`) | Last 12 msgs + `system-prompt.txt` | ChatWidget |
+| `/api/chat` | POST | NVIDIA NIM (hardcoded `https://integrate.api.nvidia.com/v1`) | `meta/llama-3.1-8b-instruct` | No (`max_tokens: 512`) | Last 12 msgs + `system-prompt.txt` | ChatWidget |
 | `/api/chat-full` | POST | OpenCode Zen (`OPENCODE_BASE_URL`, default `https://opencode.ai/zen/v1`) | Client-selectable (default `mimo-v2.5-free`) | Yes (SSE) | Last 20 msgs + inline system prompt | ChatPage |
 | `/api/health` | GET | — | — | — | — | Health check |
 

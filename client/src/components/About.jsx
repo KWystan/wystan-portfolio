@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section id="about" className="py-8 md:py-10 border-t border-black/6 border-line-animate">
       <div className="max-w-5xl mx-auto px-6 border-l border-black/7 border-line-animate">
-        <h2 className="font-magazine text-lg font-semibold tracking-tight text-black mb-4">
+        <h2 className="font-display text-lg font-semibold tracking-tight text-black mb-4">
           About
         </h2>
         <div
@@ -22,7 +22,7 @@ export default function About() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                 </span>
-                <p className="text-sm leading-relaxed text-black/60">{text}</p>
+                <p className="text-sm leading-relaxed text-black/60 font-serif">{text}</p>
               </div>
             ))}
           </div>
