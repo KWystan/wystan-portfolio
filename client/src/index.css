@@ -1,12 +1,8 @@
-@import '@fontsource-variable/geist';
-@import '@fontsource-variable/geist-mono';
 @import "tailwindcss";
 
 /* ── Design Engineering theme (Emil Kowalski) ──────────────
  *  Mode:   Light — white #ffffff bg, black #000000 text
  *  Feel:   Clean paper, compressed, outlined
- *  Fonts:  Geist (Vercel), Geist Mono (Vercel), Geist Pixel (Vercel),
- *          Source Serif 4 (Google Fonts)
  *  Motion: Only transform & opacity, under 300ms, custom ease
  * ──────────────────────────────────────────────────────── */
 
@@ -20,19 +16,8 @@
   --animate-float: float 4s var(--ease-in-out-expo) infinite;
   --animate-blink: blink 0.7s step-end infinite;
 
-  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, serif;
-  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
-  --font-display: 'Geist Pixel Square', monospace;
-}
-
-/* ── Geist Pixel (display font) ───────────────────────────── */
-@font-face {
-  font-family: 'Geist Pixel Square';
-  src: url('./fonts/GeistPixel-Square.woff2') format('woff2');
-  font-weight: 400 700;
-  font-display: swap;
-  font-style: normal;
+  --font-magazine: 'Playfair Display', Georgia, serif;
+  --font-cursive: 'Dancing Script', cursive;
 }
 
 /* ── Entrance keyframes ─────────────────────────────────── */

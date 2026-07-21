@@ -179,46 +179,6 @@ app.post('/api/chat-full', async (req, res) => {
   }
 });
 
-// ── Contact form endpoint ─────────────────────────────────────
-app.post('/api/contact', (req, res) => {
-  const { name, email, subject, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Name, email, and message are required.' });
-  }
-
-  /* Basic sanitization */
-  const sanitize = (str) => str.replace(/[<>]/g, '').trim().slice(0, 2000);
-
-  const entry = {
-    name: sanitize(name),
-    email: sanitize(email),
-    subject: sanitize(subject || 'No subject'),
-    message: sanitize(message),
-    timestamp: new Date().toISOString(),
-  };
-
-  /* Store to a local JSON file */
-  const FILE = path.join(__dirname, 'messages.json');
-  let messages = [];
-  try {
-    if (fs.existsSync(FILE)) {
-      messages = JSON.parse(fs.readFileSync(FILE, 'utf8'));
-    }
-  } catch { /* ignore corrupt file */ }
-
-  messages.push(entry);
-
-  try {
-    fs.writeFileSync(FILE, JSON.stringify(messages, null, 2), 'utf8');
-    console.log(`[contact] New message from ${entry.name} <${entry.email}>`);
-    res.json({ success: true, message: 'Message received! I\'ll get back to you soon.' });
-  } catch (err) {
-    console.error('[contact] Failed to save:', err);
-    res.status(500).json({ error: 'Failed to save message. Please try again.' });
-  }
-});
-
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running!' });

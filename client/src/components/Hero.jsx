@@ -47,10 +47,10 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-col mt-2 gap-0.5">
-            <span className="font-display text-lg text-black/50 leading-none">
+            <span className="font-cursive text-lg text-black/50 leading-none">
               Hello, I'm
             </span>
-            <h1 className="font-display text-[28px] font-semibold text-black leading-tight tracking-tight">
+            <h1 className="font-magazine text-[28px] font-semibold text-black leading-tight tracking-tight">
               {hero.firstName} {hero.middleName} {hero.lastName}
             </h1>
             <p className="text-sm text-black/55 leading-snug min-h-[1.25em]">

@@ -7,7 +7,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-8 md:py-10 border-t border-black/6 border-line-animate">
       <div className="max-w-5xl mx-auto px-6 border-l border-black/7 border-line-animate">
-        <h2 className="font-display text-lg font-semibold tracking-tight text-black mb-5">
+        <h2 className="font-magazine text-lg font-semibold tracking-tight text-black mb-5">
           Experience <span className="text-black/35 text-base font-normal">[{experience.length}]</span>
         </h2>
         <div

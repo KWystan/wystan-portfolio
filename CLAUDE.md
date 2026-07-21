@@ -103,8 +103,6 @@ Set these in Vercel dashboard (Settings → Environment Variables) — **not** i
 
 The server boots fine without them — chat endpoints return 503 gracefully.
 
-Full Vercel deployment guide: `VERCEL-DEPLOY-GUIDE.md` (root) — a standalone step-by-step reference covering monorepo structure, `api/index.js` pattern, `require.main === module` guard, `vercel.json` rewrite rules, and troubleshooting.
-
 ### Deploy steps
 
 ```bash
@@ -129,22 +127,14 @@ git push
 
 Full reference: `emil-design-eng-skill.md` (root) and `DOCS.md`. The live tokens/keyframes are in `client/src/index.css`. Load-bearing conventions:
 
-- **Tailwind v4 CSS-first config.** `@import "tailwindcss";` then `@theme { … }` defines design tokens: easing cubs (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), `--animate-*` shorthand, fonts (`--font-sans` = Geist, `--font-serif` = Source Serif 4, `--font-mono` = Geist Mono, `--font-display` = Geist Pixel Square). Add tokens here, not in a JS config.
+- **Tailwind v4 CSS-first config.** `@import "tailwindcss";` then `@theme { … }` defines design tokens: easing cubs (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), `--animate-*` shorthand, fonts (`--font-magazine` = Playfair Display, `--font-cursive` = Dancing Script). Add tokens here, not in a JS config.
 - **Only animate `transform` and `opacity`** — never `width`/`height`/`margin`/`padding` (layout/paint).
 - **Never animate from `scale(0)`** — entries use `scale(0.95)` + `opacity: 0` (see the `scale-in` / `fade-up` keyframes).
 - **Custom cubic-bezier easing only** — no CSS built-in easings. Use the `--ease-*` vars.
 - **Durations under 300ms** for UI; buttons `active:scale-[0.97]` (floating buttons `0.92`); stagger list/grid items 30–80ms.
 - **Hover is gated.** Tailwind can't emit `@media (hover: hover) and (pointer: fine)` inline, so `index.css` hand-authors `hover-gate:*` classes (e.g. `hover-gate:border-black/25`, `hover-gate:text-black`). Use `hover-gate:` — not bare `hover:` — for hover-only effects so touch devices degrade gracefully.
-- **Paper aesthetic.** Light theme: white bg / black text. Two layers of SVG fractal-noise grain on `body::before`/`::after` (`mix-blend-mode: multiply`), plus a `<Noise>` component overlay. Vertical/horizontal "grid-line" borders `border-drift` subtly via the `.grid-line-v` and `.border-line-animate` CSS classes (reusable utilities, not per-component inline styles).
+- **Paper aesthetic.** Light theme: white bg / black text. Two layers of SVG fractal-noise grain on `body::before`/`::after` (`mix-blend-mode: multiply`), plus a `<Noise>` component overlay. Vertical/horizontal "grid-line" borders `border-drift` subtly.
 - **`prefers-reduced-motion`** collapses all animation/transition durations to ~0ms but keeps opacity/color transitions.
-
-- **Material Symbols** — icon set used throughout (ChatPage sidebar buttons, ChatWidget send button, etc.). Font-variation-settings override in `index.css` for thinner weight (`wght 280`). No icon library component wrapper — icons are `<span class="material-symbols-outlined">icon_name</span>` inline.
-
-- **GitHub calendar tooltip styling** — `.react-activity-calendar__tooltip` and its arrow are styled in `index.css` for a dark tooltip that matches the monochrome aesthetic (no library-inherited styles).
-
-## Reusable components (not yet active)
-
-- **`components/Experience.jsx`** — Fully implemented section with timeline layout and corresponding `experience` data in `portfolioData.js`, but **not rendered** in `App.jsx`. To activate: import and place it in the `<main>` block.
 
 ## Key cross-cutting patterns
 

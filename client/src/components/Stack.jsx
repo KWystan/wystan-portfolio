@@ -147,7 +147,7 @@ export default function Stack() {
   return (
     <section className="py-8 md:py-10 border-t border-black/6 border-line-animate">
       <div className="max-w-5xl mx-auto px-6 border-l border-black/7 border-line-animate">
-        <h2 className="font-display text-lg font-semibold tracking-tight text-black mb-4">
+        <h2 className="font-magazine text-lg font-semibold tracking-tight text-black mb-4">
           Stack
         </h2>
         <div
@@ -241,7 +241,7 @@ export default function Stack() {
               <div className="size-8 rounded-lg border border-black/12 flex items-center justify-center text-black/50 shrink-0">
                 <TechIcon name={selectedDetail} />
               </div>
-              <h3 className="font-display text-base font-semibold text-black leading-tight">{selectedDetail}</h3>
+              <h3 className="font-magazine text-base font-semibold text-black leading-tight">{selectedDetail}</h3>
             </div>
 
             {/* Detail items */}

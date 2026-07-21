@@ -312,7 +312,7 @@ export default function ChatPage() {
                 <div className="w-14 h-14 rounded-2xl border border-black/10 flex items-center justify-center mb-5">
                   <span className="material-symbols-outlined text-2xl text-black/30">auto_awesome</span>
                 </div>
-                <h2 className="font-display text-xl font-semibold text-black mb-1.5">
+                <h2 className="font-magazine text-xl font-semibold text-black mb-1.5">
                   How can I help you?
                 </h2>
                 <p className="text-sm text-black/40 max-w-sm mb-8">

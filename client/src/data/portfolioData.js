@@ -249,62 +249,6 @@ export const cta = {
   email: 'karlcabalonga@gmail.com',
 };
 
-export const contact = {
-  headline: "Let's work together",
-  availability: "I'm always open to new opportunities, collaborations, and connecting with fellow developers.",
-  email: 'karlcabalonga@gmail.com',
-  responseTime: 'Usually responds within 24 hours',
-  subjects: ['Freelance Project', 'Collaboration', 'Job Opportunity', 'Just Saying Hi'],
-};
-
 export const footer = {
   initials: 'KC',
 };
-
-/* ── Sidebar / Nav (route-based) ────────────────────────── */
-export const sidebarLinks = [
-  { label: 'Home',         href: '/',            icon: 'home' },
-  { label: 'About',        href: '/about',       icon: 'person' },
-  { label: 'Achievements', href: '/achievements', icon: 'trophy' },
-  { label: 'Projects',     href: '/projects',    icon: 'code' },
-  { label: 'Experience',   href: '/experience',  icon: 'work_history' },
-  { label: 'Uses',         href: '/uses',        icon: 'settings' },
-  { label: 'Contact',      href: '/contact',     icon: 'mail' },
-  { label: 'Links',        href: '/links',       icon: 'link' },
-];
-
-/* ── Uses (gear / tools) ───────────────────────────────── */
-export const uses = {
-  Hardware: [
-    { name: 'Laptop', detail: 'Main development machine' },
-    { name: 'Monitor', detail: 'External display for coding' },
-    { name: 'Keyboard', detail: 'Mechanical keyboard for comfort' },
-    { name: 'Mouse', detail: 'Wireless ergonomic mouse' },
-  ],
-  Software: [
-    { name: 'VS Code', detail: 'Primary code editor with custom extensions' },
-    { name: 'Figma', detail: 'UI/UX design and prototyping' },
-    { name: 'Insomnia', detail: 'API testing and debugging' },
-    { name: 'Git', detail: 'Version control and collaboration' },
-    { name: 'Docker', detail: 'Containerization for consistent environments' },
-  ],
-  Browser: [
-    { name: 'Chrome DevTools', detail: 'Debugging and performance profiling' },
-    { name: 'React DevTools', detail: 'Component inspection and profiling' },
-  ],
-  Productivity: [
-    { name: 'Notion', detail: 'Notes, tasks, and project planning' },
-    { name: 'Figma', detail: 'Design collaboration' },
-    { name: 'Canva', detail: 'Quick graphics and social media assets' },
-  ],
-};
-
-/* ── Links Page ─────────────────────────────────────────── */
-export const links = [
-  { name: 'GitHub', url: 'https://github.com/KWystan', icon: 'github', description: 'Code, repos, and open source' },
-  { name: 'Facebook', url: 'https://www.facebook.com/stanwy.2024/', icon: 'facebook', description: "Let's connect on social media" },
-  { name: 'Instagram', url: '#', icon: 'instagram', description: 'Visual snippets and stories' },
-  { name: 'Email', url: 'mailto:karlcabalonga@gmail.com', icon: 'mail', description: 'Send me a message directly' },
-  { name: 'Manglo.me', url: 'https://www.manglo.me', icon: 'open_in_new', description: 'My latest project' },
-  { name: 'Wystan AI', url: 'https://wystan-ai.vercel.app/chat', icon: 'smart_toy', description: 'Try my AI assistant' },
-];

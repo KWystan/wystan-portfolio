@@ -5,7 +5,7 @@ A personal portfolio site for **Karl Wystan Cabalonga** — aspiring web develop
 ## Features
 
 - **Portfolio landing page** — Hero, About, Stack, Education, Projects, Certifications, CTA sections
-- **AI Chat Widget** — floating chat bubble (landing page) powered by NVIDIA NIM (Llama 3.1 8B)
+- **AI Chat Widget** — floating chat bubble (landing page) powered by NVIDIA NIM (Llama 4 Maverick)
 - **AI Chat Page** — standalone `/chat` page with model selection and SSE streaming via OpenCode Zen (MiMo-V2.5 and others)
 - **Paper aesthetic** — SVG fractal-noise grain overlay, grid-line borders, Emil Kowalski design engineering conventions
 - **Typewriter hero** — cycling title with blink cursor
@@ -33,7 +33,6 @@ A personal portfolio site for **Karl Wystan Cabalonga** — aspiring web develop
 ├── DOCS.md              # Architectural documentation
 ├── CLAUDE.md            # Guidance for Claude Code
 ├── emil-design-eng-skill.md  # Design engineering reference
-├── VERCEL-DEPLOY-GUIDE.md  # Standalone deployment guide
 └── README.md
 ```
 
@@ -70,7 +69,7 @@ The Vite dev server proxies `/api/*` requests to the Express backend automatical
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React 19, Vite 8, Tailwind CSS v4, `styled-components`, `react-icons`, `react-github-calendar` |
+| Frontend | React 19, Vite 8, Tailwind CSS v4, `styled-components`, `react-icons` |
 | Backend | Node.js 22+, Express.js 4 |
 | AI (Widget) | NVIDIA NIM — `meta/llama-4-maverick-17b-128e-instruct` |
 | AI (Chat Page) | OpenCode Zen — `mimo-v2.5-free` (selectable models) |
