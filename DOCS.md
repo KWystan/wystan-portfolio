@@ -146,7 +146,7 @@ Full reference: `emil-design-eng-skill.md` (root).
 
 - `@import "tailwindcss"` then `@theme { … }` in `client/src/index.css`
 - No `tailwind.config.js` — tokens live in the `@theme` block
-- Design tokens defined: easing curves (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), animation shorthands (`--animate-fade-up`, `--animate-scale-in`, `--animate-float`, `--animate-blink`), fonts (`--font-magazine` = Playfair Display, `--font-cursive` = Dancing Script)
+- Design tokens defined: easing curves (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), animation shorthands (`--animate-fade-up`, `--animate-scale-in`, `--animate-float`, `--animate-blink`), fonts (`--font-sans` = Geist, `--font-serif` = Source Serif 4, `--font-mono` = Geist Mono, `--font-display` = Geist Pixel)
 
 ### Motion Rules
 

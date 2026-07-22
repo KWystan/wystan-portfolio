@@ -28,6 +28,15 @@ cd server && npm start         # Production start
 
 The Vite dev server proxies `/api/*` to the Express server, so only `http://localhost:3000` needs to be open in the browser. The `npm run dev` command at root runs both projects concurrently via `concurrently -n client,server -c cyan,green` — output is prefixed with `[client]` / `[server]` in color-coded tags.
 
+### Dependencies at a glance
+
+| Layer | Module system | Key deps |
+|---|---|---|
+| Root (`package.json`) | — | `concurrently` only |
+| `client/` | ESM (`"type": "module"`) | React 19, Vite 8, Tailwind v4 (`@tailwindcss/vite`), `react-icons`, `styled-components`, `react-github-calendar` |
+| `server/` | CommonJS (no `type`) | Express 4, `cors`, `dotenv` |
+| `client/index.html` (Google Fonts) | external | **Material Symbols** (`material-symbols-outlined` class — used in every component), Geist, Geist Mono, Source Serif 4 |
+
 ## What this is
 
 "Wystan" — a personal portfolio site for Karl Wystan Cabalonga. A plain two-directory monorepo (no workspace manager): `client/` is the React frontend, `server/` is the Express API that also proxies two AI chat providers.
@@ -56,9 +65,11 @@ The Vite dev server proxies `/api/*` to the Express server, so only `http://loca
 
 - **GitHub Activity section** (`components/Contributions.jsx`): renders between `Certifications` and `CTA` on the landing page. Uses `react-github-calendar` to display a contribution heatmap for the `KWystan` GitHub account. Grey-on-white monochrome theme matching the paper aesthetic. Includes tooltip showing per-day counts.
 
+- **Unused components:** `components/Experience.jsx` exists and has data in `portfolioData.js` (`experience` export) but is not rendered in `App.jsx`. It's a timeline-style card component ready to wire in when needed.
+
 ## Backend architecture (`server/index.js`)
 
-All routes currently live in `index.js` (there is no `server/routes/` dir yet). The server reads `server/system-prompt.txt` **once at boot** with `fs.readFileSync` and uses it as the system message for the portfolio assistant. Middleware: `cors()` and `express.json({ limit: '64kb' })`.
+All routes currently live in `index.js` (there is no `server/routes/` dir yet). The server reads `server/system-prompt.txt` **once at boot** with `fs.readFileSync` and uses it as the system message for the portfolio assistant. Middleware: `cors()` and `express.json({ limit: '64kb' })`. Environment variables are loaded from `server/.env` via `dotenv`.
 
 Three endpoints:
 
@@ -127,13 +138,14 @@ git push
 
 Full reference: `emil-design-eng-skill.md` (root) and `DOCS.md`. The live tokens/keyframes are in `client/src/index.css`. Load-bearing conventions:
 
-- **Tailwind v4 CSS-first config.** `@import "tailwindcss";` then `@theme { … }` defines design tokens: easing cubs (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), `--animate-*` shorthand, fonts (`--font-magazine` = Playfair Display, `--font-cursive` = Dancing Script). Add tokens here, not in a JS config.
+- **Tailwind v4 CSS-first config.** `@import "tailwindcss";` then `@theme { … }` defines design tokens: easing cubs (`--ease-out-expo`, `--ease-in-out-expo`, `--ease-spring`), `--animate-*` shorthand, fonts (`--font-sans` = Geist, `--font-serif` = Source Serif 4, `--font-mono` = Geist Mono, `--font-display` = Geist Pixel). Add tokens here, not in a JS config.
 - **Only animate `transform` and `opacity`** — never `width`/`height`/`margin`/`padding` (layout/paint).
 - **Never animate from `scale(0)`** — entries use `scale(0.95)` + `opacity: 0` (see the `scale-in` / `fade-up` keyframes).
 - **Custom cubic-bezier easing only** — no CSS built-in easings. Use the `--ease-*` vars.
 - **Durations under 300ms** for UI; buttons `active:scale-[0.97]` (floating buttons `0.92`); stagger list/grid items 30–80ms.
 - **Hover is gated.** Tailwind can't emit `@media (hover: hover) and (pointer: fine)` inline, so `index.css` hand-authors `hover-gate:*` classes (e.g. `hover-gate:border-black/25`, `hover-gate:text-black`). Use `hover-gate:` — not bare `hover:` — for hover-only effects so touch devices degrade gracefully.
 - **Paper aesthetic.** Light theme: white bg / black text. Two layers of SVG fractal-noise grain on `body::before`/`::after` (`mix-blend-mode: multiply`), plus a `<Noise>` component overlay. Vertical/horizontal "grid-line" borders `border-drift` subtly.
+- **Icon system: Google Material Symbols.** Loaded from Google Fonts in `client/index.html` as a CSS font, not from npm. Used via `<span class="material-symbols-outlined">icon_name</span>` across every component. See the [Material Symbols catalog](https://fonts.google.com/icons) for icon names.
 - **`prefers-reduced-motion`** collapses all animation/transition durations to ~0ms but keeps opacity/color transitions.
 
 ## Key cross-cutting patterns

@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section id="about" className="py-8 md:py-10 border-t border-black/6 border-line-animate">
       <div className="max-w-5xl mx-auto px-6 border-l border-black/7 border-line-animate">
-        <h2 className="font-magazine text-lg font-semibold tracking-tight text-black mb-4">
+        <h2 className="font-sans text-lg font-semibold tracking-tight text-black mb-4">
           About
         </h2>
         <div
